@@ -5,7 +5,7 @@ import { auth } from '../firebase/config';
 import { useAuthContext } from '../context/useAuthContext';
 
 export default function Navbar() {
-  const { dispatch } = useAuthContext();
+  const { dispatch, user } = useAuthContext();
 
   const logout = () => {
     signOut(auth)
@@ -24,13 +24,22 @@ export default function Navbar() {
         <li>
           <Link to="/">홈</Link>
         </li>
-        <li>
-          <Link to="/login">로그인</Link>
-        </li>
-        <li>
-          <Link to="/signup">가입</Link>
-        </li>
-        <li onClick={logout}>로그아웃</li>
+        {!user && (
+          <>
+            <li>
+              <Link to="/login">로그인</Link>
+            </li>
+            <li>
+              <Link to="/signup">가입</Link>
+            </li>
+          </>
+        )}
+        {user && (
+          <>
+            <li>🚀 {user.email}</li>
+            <li onClick={logout}>로그아웃</li>
+          </>
+        )}
       </ul>
     </nav>
   );
