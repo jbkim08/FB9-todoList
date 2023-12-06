@@ -1,14 +1,17 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { useState } from 'react';
 import { db } from '../firebase/config';
+import { useAuthContext } from '../context/useAuthContext';
 
 export default function TodoForm() {
   const [newTodo, setNewTodo] = useState('');
+  const { user } = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const ref = collection(db, 'todos');
     await addDoc(ref, {
+      uid: user.uid,
       title: newTodo,
     });
 
