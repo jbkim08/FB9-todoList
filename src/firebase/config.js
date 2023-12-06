@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBClqO5fBWOpca9bnTebzgvzeRTuEMr0z4',
@@ -9,5 +10,10 @@ const firebaseConfig = {
   appId: '1:496208153776:web:2ab44b390e59c18f0dff75',
 };
 
-// Initialize Firebase
+// 파이어베이스 초기설정
 const app = initializeApp(firebaseConfig);
+
+// DB 초기화
+const db = getFirestore();
+
+export { db };
