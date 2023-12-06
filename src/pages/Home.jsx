@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import TodoList from '../components/TodoList';
 import TodoForm from '../components/TodoForm';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { db } from '../firebase/config';
+import { useAuthContext } from '../context/useAuthContext';
 
 export default function Home() {
   const [todos, setTodos] = useState(null);
-  console.log(todos);
+  const { user } = useAuthContext();
 
   useEffect(() => {
-    const ref = collection(db, 'todos');
-
-    //todos컬렉션에 모든 문서들을 가져오기
-    const unsub = onSnapshot(ref, (snapshot) => {
+    //where절이 있을경우 query로 만들어준다.
+    const q = query(collection(db, 'todos'), where('uid', '==', user.uid));
+    const unsub = onSnapshot(q, (snapshot) => {
       let results = [];
       //성공시 snapshot.docs에 모든 문서들이 들어있음
       snapshot.docs.forEach((doc) => {
