@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TodoList from '../components/TodoList';
 import TodoForm from '../components/TodoForm';
-import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase/config';
 
 export default function Home() {
