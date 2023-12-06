@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBClqO5fBWOpca9bnTebzgvzeRTuEMr0z4',
@@ -15,5 +16,7 @@ const app = initializeApp(firebaseConfig);
 
 // DB 초기화
 const db = getFirestore();
+// 인증 초기화
+const auth = getAuth();
 
-export { db };
+export { db, auth };
